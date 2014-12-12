@@ -1,0 +1,43 @@
+<ui:composition template="/resources/templates/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="content">
+        <h:form id="form">
+            <h:panelGrid>
+                <h:outputLabel value="Departamento"
+                               for="slcDepartamento"/>
+                <h:selectOneMenu id="slcDepartamento"
+                                 value="#{simpleComboBoxController.departamentoSel}"
+                                 converter="omnifaces.SelectItemsConverter"
+                                 valueChangeListener="#{simpleComboBoxController.departamentoChangeListener}"
+                                 required="true">
+                    <f:selectItem itemLabel="-- Seleccione un departamento --"
+                                  noSelectionOption="true"/>
+                    <f:selectItems value="#{simpleComboBoxController.departamentos}"
+                                   var="dpto"
+                                   itemValue="#{dpto}"
+                                   itemLabel="#{dpto.nombre}"/>
+                    <p:ajax update="slcMunicipio"/>
+                </h:selectOneMenu>
+
+                <h:outputLabel value="Municipio"
+                               for="slcMunicipio"/>
+                <h:selectOneMenu id="slcMunicipio"
+                                 converter="omnifaces.SelectItemsConverter"
+                                 value="#{simpleComboBoxController.municipioSel}"
+                                 required="true">
+                    <f:selectItem itemLabel="-- Seleccione un departamento --"
+                                  noSelectionOption="true"/>
+                    <f:selectItems value="#{simpleComboBoxController.municipios}"
+                                   var="mun"
+                                   itemValue="#{mun}"
+                                   itemLabel="#{mun.nombre}"/>
+                </h:selectOneMenu>
+
+            </h:panelGrid>
+        </h:form>
+    </ui:define>
+</ui:composition>
